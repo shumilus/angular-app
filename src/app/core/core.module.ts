@@ -4,7 +4,9 @@ import { HomepageComponent } from '../homepage/containers';
 import { AddressCheckerComponent } from '../homepage/components';
 import { PageLayoutComponent } from '../page-layout/page-layout.component';
 import { StoreModule } from '@ngrx/store';
-import { templatesSettingsFeature, templatesSettingsReducer } from './store/page-settings/page-settings.reducer';
+import { templatesSettingsReducer } from './store/page-settings/page-settings.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { pageNameReducer } from './store/page-name/page-name.reducer';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,11 @@ import { templatesSettingsFeature, templatesSettingsReducer } from './store/page
   ],
   imports: [
     CommonModule,
-    StoreModule.forFeature(templatesSettingsFeature, templatesSettingsReducer),
+    StoreModule.forRoot({
+      pageName: pageNameReducer,
+      pagesSettings: templatesSettingsReducer,
+    }),
+    StoreDevtoolsModule.instrument(),
   ]
 })
 export class CoreModule {

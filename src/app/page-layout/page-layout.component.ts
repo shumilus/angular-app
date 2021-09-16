@@ -1,4 +1,8 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { PageName } from '../shared/constants/page-names.config';
+import { Observable } from 'rxjs';
+import { getPageName } from '../core/store/page-name/page-name.selectors';
 
 @Component({
   selector: 'app-page-layout',
@@ -7,12 +11,15 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PageLayoutComponent implements OnInit {
-  @Input() title: string;
+  pageName$: Observable<PageName>;
 
-  constructor() {
+  homepage = PageName.homepage;
+
+  constructor(private _store: Store) {
   }
 
   ngOnInit(): void {
+    this.pageName$ = this._store.select(getPageName);
   }
 
 }

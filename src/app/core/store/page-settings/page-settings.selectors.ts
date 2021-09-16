@@ -1,6 +1,11 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { templatesSettingsFeature, TemplatesSettingsState } from './page-settings.reducer';
+import { createSelector } from '@ngrx/store';
+import { TemplatesSettingsState } from './page-settings.reducer';
+import { AppState } from '../app.state';
 
-export const getTemplatesSettingsState = createFeatureSelector<TemplatesSettingsState>(templatesSettingsFeature);
+export const selectTemplatesSettings = createSelector(
+  (state: AppState) => state.pagesSettings,
+  (settings: TemplatesSettingsState) => settings
+);
 
-export const getTemplatesSettings = createSelector(getTemplatesSettingsState, (state => state.templatesSettings));
+export const getTemplatesSettings = createSelector(selectTemplatesSettings, (state => state.templatesSettings));
+

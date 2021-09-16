@@ -1,1 +1,3 @@
-<app-homepage [title]="title"></app-homepage>
+<ng-container *ngIf="pageName$ | async as name">
+  <app-homepage *ngIf="name === homepage"></app-homepage>
+</ng-container>
