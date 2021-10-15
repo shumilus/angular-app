@@ -3,3 +3,9 @@
 <ng-template #noSettings>
   <p>Sorry, there is no templates settings!</p>
 </ng-template>
+
+<input ngx-google-places-autocomplete
+       [options]=options #placesRef="ngx-places"
+       (onAddressChange)="handleAddressChange($event)"/>
+
+<input type="text" [(ngModel)]="test" (ngModelChange)="changeTest($event)">
